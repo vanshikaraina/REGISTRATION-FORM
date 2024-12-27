@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+  <div class="form-container">
+    <h1>Login</h1>
+
+    <label for="loginEmail">Email</label>
+    <input type="email" id="loginEmail" placeholder="Enter your email">
+
+
+    <label for="loginPassword">Password</label>
+    <input type="password" id="loginPassword" placeholder="Enter your password">
+
+    <button id="loginBtn">Login</button>
+
+    <p class="login-text">
+      New user? <a href="index.html" class="login-link">Click here to register</a>
+    </p>
+  </div>
+
+  <script>
+    const loginBtn = document.querySelector("#loginBtn");
+
+    loginBtn.addEventListener("click", () => {
+      const email = document.querySelector("#loginEmail").value;
+      const password = document.querySelector("#loginPassword").value;
+
+      if (!email || !password) {
+        alert("Please enter both email and password!");
+        return;
+      }
+
+      const loginData = { email, password };
+
+      fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message === "ok") {
+            alert("Login successful!");
+            window.location.href = "table.html"; 
+          } else {
+            alert("Invalid credentials. Please try again.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("An error occurred. Please try again.");
+        });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+[
+  {
+    "fname": "vanshika",
+    "lname": "raina",
+    "ayu": "19",
+    "email": "vanshika@gmail.com",
+    "password": "vanshika",
+    "address": "uni",
+    "pincode": "140401",
+    "phone": "11111199999"
+  },
+  {
+    "fname": "Tushar",
+    "lname": "Raina",
+    "ayu": "29",
+    "email": "tushar@gmail.com",
+    "password": "tushar",
+    "address": "home",
+    "pincode": "140000",
+    "phone": "9898976767"
+  },
+  {
+    "fname": "Tanya",
+    "lname": "Garg",
+    "ayu": "27",
+    "email": "tanya@gmail.com",
+    "password": "tanya",
+    "address": "home",
+    "pincode": "140000",
+    "phone": "9898956565"
+  }
+]

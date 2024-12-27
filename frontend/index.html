@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="form-container">
+    <h1>Registration Form</h1>
+
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" placeholder="Enter your first name">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" placeholder="Enter your last name">
+
+    <label for="fage">Age</label>
+    <input type="text" id="fage" placeholder="Enter your age">
+
+    <label for="femail">Email</label>
+    <input type="email" id="femail" placeholder="Enter your email">
+
+    <label for="fpassword">Password</label>
+    <input type="password" id="fpassword" placeholder="Enter your password">
+
+    <label for="fpasswordVerify">Verify Password</label>
+    <input type="password" id="fpasswordVerify" placeholder="Re-enter your password">
+
+    <label for="faddress">Address</label>
+    <textarea id="faddress" placeholder="Enter your address"></textarea>
+
+    <label for="fpincode">Pincode</label>
+    <input type="text" id="fpincode" placeholder="Enter your pincode">
+
+    <label for="fphone">Phone Number</label>
+    <input type="text" id="fphone" placeholder="Enter your phone number">
+
+    <button id="fbtn">Submit Data</button>
+
+    <p class="login-text">Already registered? <a href="login.html" class="login-link">Login</a></p>
+
+  </div>
+
+  <script>
+
+    const btn = document.querySelector("#fbtn");
+
+    btn.addEventListener("click", () => {
+      const name = document.querySelector("#fname").value; 
+      const lastName = document.querySelector("#lname").value; 
+      const age = document.querySelector("#fage").value;  
+      const email = document.querySelector("#femail").value;
+      const password = document.querySelector("#fpassword").value;
+      const passwordVerify = document.querySelector("#fpasswordVerify").value;
+      const address = document.querySelector("#faddress").value;
+      const pincode = document.querySelector("#fpincode").value;
+      const phone = document.querySelector("#fphone").value; 
+
+      if (!name || !lastName || !age || !email || !password || !passwordVerify || !address || !pincode || !phone) {
+        alert("Please fill out all fields!");
+        return;
+      }
+
+      if (password !== passwordVerify) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      const registerData = {
+        fname: name,
+        lname: lastName,
+        ayu: age,
+        email: email,
+        password: password,
+        address: address,
+        pincode: pincode,
+        phone: phone
+      };
+
+      console.log(registerData);  
+
+      const url = "http://localhost:5000/saveData";
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(registerData) 
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Data received:', data); 
+          if (data.message === "ok") {
+            alert("Data submitted successfully!");
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error); 
+          alert("An error occurred. Please try again.");
+        });
+    });
+  </script>
+</body>
+
+</html>
